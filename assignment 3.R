@@ -59,7 +59,7 @@ rankhospital <- function(state, outcome, num = "best") {
     cleandat[, "y"] <- as.numeric(as.character(cleandat[, "y"]))
 
     sorted.data <- data.frame()
-    sorted.data <- order(cleandat$y)
+    sorted.data <- order(cleandat$y, cleandat$z)
     sorted.data <- cleandat[sorted.data, ]
 
     if (num == "best") {
@@ -75,7 +75,7 @@ rankhospital <- function(state, outcome, num = "best") {
     cleandat[, "y"] <- as.numeric(as.character(cleandat[, "y"]))
 
     sorted.data <- data.frame()
-    sorted.data <- order(cleandat$y)
+    sorted.data <- order(cleandat$y, cleandat$z)
     sorted.data <- cleandat[sorted.data, ]
 
     print(sorted.data)
@@ -93,7 +93,7 @@ rankhospital <- function(state, outcome, num = "best") {
     cleandat[, "y"] <- as.numeric(as.character(cleandat[, "y"]))
 
     sorted.data <- data.frame()
-    sorted.data <- order(cleandat$y)
+    sorted.data <- order(cleandat$y, cleandat$z)
     sorted.data <- cleandat[sorted.data, ]
 
     if (num == "best") {
