@@ -64,8 +64,10 @@ rankhospital <- function(state, outcome, num = "best") {
 
     if (num == "best") {
       print(sorted.data$z[1])
-    }  else {
-      print(sorted.data$z[num])
+    }  else if (num == "worst"){
+        print(sorted.data$z[length(sorted.data$z)])
+    } else {
+        print(sorted.data$z[num])
     }
   } else if (outcome == "heart failure") {
     dat <- data.frame(x = input$State, y = input$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure, z = input$Hospital.Name)
@@ -78,11 +80,11 @@ rankhospital <- function(state, outcome, num = "best") {
     sorted.data <- order(cleandat$y, cleandat$z)
     sorted.data <- cleandat[sorted.data, ]
 
-    print(sorted.data)
-
     if (num == "best") {
       print(sorted.data$z[1])
-    }  else {
+    } else if (num == "worst"){
+        print(sorted.data$z[length(sorted.data$z)])
+    } else {
       print(sorted.data$z[num])
     }
   } else if (outcome == "pneumonia") {
@@ -98,8 +100,28 @@ rankhospital <- function(state, outcome, num = "best") {
 
     if (num == "best") {
       print(sorted.data$z[1])
-    }  else {
+    } else if (num == "worst"){
+        print(sorted.data$z[length(sorted.data$z)])
+    } else {
       print(sorted.data$z[num])
     }
   }
 } # end rankhospital()
+
+rankall <- function(outcome, num) {
+  outcome.range <- c("heart attack", "heart failure", "pneumonia")
+  input <- read.csv("outcome-of-care-measures.csv")
+
+  try (if (!(outcome %in% outcome.range)) stop("invalid outcome"))
+
+  if (outcome == "pneumonia") {
+  dat <- data.frame("state" = input$State, "rate" = input$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, "hospital" = input$Hospital.Name)
+
+  cleandat <- data.frame()
+  cleandat <- dat[which(dat[, "rate"] != "Not Available"), ]
+  cleandat[, "rate"] <- as.numeric(as.character(cleandat[,"rate"]))
+
+  print(cleandat$rate)
+  }
+
+} # end rankall()
