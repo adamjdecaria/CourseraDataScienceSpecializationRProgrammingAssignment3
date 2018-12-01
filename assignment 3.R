@@ -115,13 +115,18 @@ rankall <- function(outcome, num) {
   try (if (!(outcome %in% outcome.range)) stop("invalid outcome"))
 
   if (outcome == "pneumonia") {
-  dat <- data.frame("state" = input$State, "rate" = input$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, "hospital" = input$Hospital.Name)
+    dat <- data.frame("state" = input$State, "rate" = input$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, "hospital" = input$Hospital.Name)
 
-  cleandat <- data.frame()
-  cleandat <- dat[which(dat[, "rate"] != "Not Available"), ]
-  cleandat[, "rate"] <- as.numeric(as.character(cleandat[,"rate"]))
+    cleandat <- data.frame()
+    cleandat <- dat[which(dat[, "rate"] != "Not Available"), ]
+    cleandat[, "rate"] <- as.numeric(as.character(cleandat[,"rate"]))
 
-  print(cleandat$rate)
+    sorted.data <- data.frame()
+    sorted.data <- order(cleandat$rate, cleandat$hospital)
+    sorted.data <- cleandat[sorted.data, ]
+
+    split.sorted.data <- split(sorted.data, f = sorted.data$state)
+    print(split.sorted.data)
   }
 
 } # end rankall()
