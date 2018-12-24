@@ -128,11 +128,66 @@ rankall <- function(outcome, num) {
     split.sorted.data <- data.frame()
     split.sorted.data <- split(sorted.data, f = sorted.data$state)
 
+    results.df <- data.frame()
+
+    for (item in split.sorted.data) {
+      if (num == "best") {
+        temp.df <- data.frame(item[1,])
+        results.df <- rbind(results.df, temp.df)
+      } else if (num == "worst") {
+        temp.df <- data.frame(item[length(item),])
+        results.df <- rbind(results.df, temp.df)
+      } else {
+        temp.df <- data.frame(item[num],)
+        results.df <- rbind(results.df, temp.df)
+      }
+    }
+    print(results.df)
+  } else if (outcome == "heart failure") {
+    dat <- data.frame("state" = input$State, "rate" = input$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, "hospital" = input$Hospital.Name)
+
+    cleandat <- data.frame()
+    cleandat <- dat[which(dat[, "rate"] != "Not Available"), ]
+    cleandat[, "rate"] <- as.numeric(as.character(cleandat[,"rate"]))
+
+    sorted.data <- data.frame()
+    sorted.data <- order(cleandat$rate, cleandat$hospital)
+    sorted.data <- cleandat[sorted.data, ]
+
+    split.sorted.data <- data.frame()
+    split.sorted.data <- split(sorted.data, f = sorted.data$state)
+
     results <- c()
 
     for (item in split.sorted.data) {
       if (num == "best") {
         results <- append(results, item[1,])
+      } else if (num == "worst") {
+        results <- append(results, item[length(item),])
+      } else {
+        results <- append(results, item[num,])
+      }
+    }
+    print(results)
+  } else if (outcome == "heart attack") {
+    dat <- data.frame("state" = input$State, "rate" = input$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, "hospital" = input$Hospital.Name)
+
+    cleandat <- data.frame()
+    cleandat <- dat[which(dat[, "rate"] != "Not Available"), ]
+    cleandat[, "rate"] <- as.numeric(as.character(cleandat[,"rate"]))
+
+    sorted.data <- data.frame()
+    sorted.data <- order(cleandat$rate, cleandat$hospital)
+    sorted.data <- cleandat[sorted.data, ]
+
+    split.sorted.data <- data.frame()
+    split.sorted.data <- split(sorted.data, f = sorted.data$state)
+
+    results <- c()
+
+    for (item in split.sorted.data) {
+      if (num == "best") {
+        results.list <- append(results.list, item[1,])
       } else if (num == "worst") {
         results <- append(results, item[length(item),])
       } else {
