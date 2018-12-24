@@ -132,11 +132,11 @@ rankall <- function(outcome, num) {
 
     for (item in split.sorted.data) {
       if (num == "best") {
-        results <- append(results, item$rate[1])
+        results <- append(results, item[1,])
       } else if (num == "worst") {
-        results <- append(results, item$rate[length(item)])
+        results <- append(results, item[length(item),])
       } else {
-        results <- append(results, item$rate[num])
+        results <- append(results, item[num,])
       }
     }
     print(results)
