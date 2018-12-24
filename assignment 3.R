@@ -125,8 +125,20 @@ rankall <- function(outcome, num) {
     sorted.data <- order(cleandat$rate, cleandat$hospital)
     sorted.data <- cleandat[sorted.data, ]
 
+    split.sorted.data <- data.frame()
     split.sorted.data <- split(sorted.data, f = sorted.data$state)
-    print(split.sorted.data)
-  }
 
+    results <- c()
+
+    for (item in split.sorted.data) {
+      if (num == "best") {
+        results <- append(results, item$rate[1])
+      } else if (num == "worst") {
+        results <- append(results, item$rate[length(item)])
+      } else {
+        results <- append(results, item$rate[num])
+      }
+    }
+    print(results)
+  }
 } # end rankall()
