@@ -138,7 +138,7 @@ rankall <- function(outcome, num) {
         temp.df <- data.frame(item[length(item),])
         results.df <- rbind(results.df, temp.df)
       } else {
-        temp.df <- data.frame(item[num],)
+        temp.df <- data.frame(item[num,])
         results.df <- rbind(results.df, temp.df)
       }
     }
@@ -157,18 +157,21 @@ rankall <- function(outcome, num) {
     split.sorted.data <- data.frame()
     split.sorted.data <- split(sorted.data, f = sorted.data$state)
 
-    results <- c()
+    results.df <- data.frame()
 
     for (item in split.sorted.data) {
       if (num == "best") {
-        results <- append(results, item[1,])
+        temp.df <- data.frame(item[1,])
+        results.df <- rbind(results.df, temp.df)
       } else if (num == "worst") {
-        results <- append(results, item[length(item),])
+        temp.df <- data.frame(item[length(item),])
+        results.df <- rbind(results.df, temp.df)
       } else {
-        results <- append(results, item[num,])
+        temp.df <- data.frame(item[num,])
+        results.df <- rbind(results.df, temp.df)
       }
     }
-    print(results)
+    print(results.df)
   } else if (outcome == "heart attack") {
     dat <- data.frame("state" = input$State, "rate" = input$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, "hospital" = input$Hospital.Name)
 
@@ -183,17 +186,20 @@ rankall <- function(outcome, num) {
     split.sorted.data <- data.frame()
     split.sorted.data <- split(sorted.data, f = sorted.data$state)
 
-    results <- c()
+    results.df <- data.frame()
 
     for (item in split.sorted.data) {
       if (num == "best") {
-        results.list <- append(results.list, item[1,])
+        temp.df <- data.frame(item[1,])
+        results.df <- rbind(results.df, temp.df)
       } else if (num == "worst") {
-        results <- append(results, item[length(item),])
+        temp.df <- data.frame(item[length(item),])
+        results.df <- rbind(results.df, temp.df)
       } else {
-        results <- append(results, item[num,])
+        temp.df <- data.frame(item[num,])
+        results.df <- rbind(results.df, temp.df)
       }
     }
-    print(results)
+    print(results.df)
   }
 } # end rankall()
