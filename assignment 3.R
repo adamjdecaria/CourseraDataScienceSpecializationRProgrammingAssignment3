@@ -135,7 +135,7 @@ rankall <- function(outcome, num) {
         temp.df <- data.frame(item[1,])
         results.df <- rbind(results.df, temp.df)
       } else if (num == "worst") {
-        temp.df <- data.frame(item[length(item),])
+        temp.df <- data.frame(apply(item, 2, FUN=max))
         results.df <- rbind(results.df, temp.df)
       } else {
         temp.df <- data.frame(item[num,])
@@ -164,7 +164,7 @@ rankall <- function(outcome, num) {
         temp.df <- data.frame(item[1,])
         results.df <- rbind(results.df, temp.df)
       } else if (num == "worst") {
-        temp.df <- data.frame(item[length(item),])
+        temp.df <- data.frame(apply(item, 2, FUN=max))
         results.df <- rbind(results.df, temp.df)
       } else {
         temp.df <- data.frame(item[num,])
@@ -193,7 +193,7 @@ rankall <- function(outcome, num) {
         temp.df <- data.frame(item[1,])
         results.df <- rbind(results.df, temp.df)
       } else if (num == "worst") {
-        temp.df <- data.frame(item[length(item),])
+        temp.df <- data.frame(apply(item, 2, FUN=max))
         results.df <- rbind(results.df, temp.df)
       } else {
         temp.df <- data.frame(item[num,])
